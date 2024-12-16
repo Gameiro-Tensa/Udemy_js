@@ -31,6 +31,18 @@ for (let i = 0; i < students.length; i++) {
         kurs2.push(students[i])
     }
 }
+/*
+// Alternative
+for (const i in students) {
+    if (i % 2 === 0) {
+        kurs1.push(students[i])
+    }
+    else {
+        kurs2.push(students[i])
+    }
+}
+*/
+
 // Ausgabe der beiden Listen
 console.log("Teilnehmer der Kurs1: ", kurs1)
 console.log("Teilnehmer der Kurs2: ", kurs2)
@@ -56,25 +68,61 @@ let prices = [
 ]
 
 let priceTotal = 0
-// Schleife, die die Preise der einzelnen Niveaus addiert
+// Schleife, die die Preise der einzelnen Niveaus addiert bis C1
 for (let i = 0; i  < levels.length; i++) {
     priceTotal = priceTotal + prices[i]
+    if (levels[i] == "C1") {
+        break
+    }
 }
 
-console.log("Der gesamte Preis von A1 bis C2 beträgt: ", priceTotal)
+console.log("Der gesamte Preis von A1 bis C1 beträgt: ", priceTotal)
 
 // Preise von A2 bis C1 berechnet
-let mediumPrice = 0
-for (let i = 1; i < levels.length - 1; i++) {
-    mediumPrice = mediumPrice + prices[i]
-}
+let costsFromA2toC1 = 0
+let levelA2Seen = false
 
-console.log("Der Preis von A2 bis C1 beträgt: ", mediumPrice)
+for ( const i in levels) {
+    const level = levels[i]
+    const price = prices[i]
+
+    if (level === "A2") {
+        levelA2Seen = true
+        continue
+    }
+
+    if (levelA2Seen) {
+        costsFromA2toC1 +=price
+    }
+
+    if (level === "C1") {
+        break
+    }
+}
+console.log("Der Preis von A2 bis C1 beträgt: ", costsFromA2toC1)
+
+// let mediumPrice = 0
+// for (let i = 1; i < levels.length - 1; i++) {
+//     mediumPrice = mediumPrice + prices[i]
+// }
+
+// console.log("Der Preis von A2 bis C1 beträgt: ", mediumPrice)
 
 // Ein Teilnehmer möchte (maximal) 1500€ in seine SPrachkenntnisse insvestieren.
 //  Bis zu welchem Level (bei A1 anfangen) können wir ihn dafür unterrichten ?
 let maxInvestment = 1500
 let newPrice = 0
+for (const i in levels) {
+    const level = levels[i]
+    const price = prices[i]
+
+    if (newPrice + price >= 1500) {
+        console.log("Wir können bis einschließlich hierhin unterrichten", levels[i - 1])
+        break
+    }
+    newPrice +=price
+}
+/*
 for (let i = 0; i < levels.length; i++) {
     newPrice = newPrice + prices[i]
     if (maxInvestment >= newPrice) {
@@ -82,6 +130,7 @@ for (let i = 0; i < levels.length; i++) {
     }
     
 }
+*/
 
 // Aufgabe 4
 let studentsPerCourse = [
@@ -107,16 +156,34 @@ let totalStudents3 = studentsPerCourse.reduce((sum, course) => sum + course.leng
 
 console.log("Anzahl der Teilnehmer in allen Kursen: ", totalStudents);
 
+const studentToCancel = "Max"
+let studentFound = false
 for (let i = 0; i < studentsPerCourse.length; i++) {
-    if (studentsPerCourse[i].indexOf("Max") != -1) {
+    if (studentsPerCourse[i].indexOf(studentToCancel) !== -1) {
         // Max entfernen
-        studentsPerCourse[i].splice(studentsPerCourse[i].indexOf("Max"), 1);
+        studentsPerCourse[i].splice(studentsPerCourse[i].indexOf(studentToCancel), 1);
         console.log("Max wurde aus diesem Kurs rausgenommen")
+        studentFound = true
         break
-    } else {
-        console.log("Max ist in diesem Kurs gar nicht eingeschrieben!")
     }
 }
 
 console.log(studentsPerCourse)
+if (studentFound === false) {
+    console.log("Kein Teilnehmer entfernt")
+}
 
+let indexLeastStudent = -1
+for (const i in studentsPerCourse) {
+    const course = studentsPerCourse[i]
+    if (indexLeastStudent === -1) {
+        indexLeastStudent = i
+    }
+
+    else {
+        if (course.length < studentsPerCourse[indexLeastStudent].length) {
+            indexLeastStudent = i
+        }
+    }
+}
+console.log(indexLeastStudent)
