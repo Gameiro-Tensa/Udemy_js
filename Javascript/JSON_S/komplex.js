@@ -1,7 +1,7 @@
 "use strict"
 
 // https://github.com/r-spacex/SpaceX-API
-// rockets.json: https://api.spacexdata.com/v3/rockets
+// https://api.spacexdata.com/v4/launches/
 
 const fs = require("fs")
 const rocketAsString = fs.readFileSync("rockets.json", {encoding: "utf-8"})
