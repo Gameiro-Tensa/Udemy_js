@@ -16,10 +16,12 @@ for (const key in student) {
 console.log("Object.keys:", Object.keys(student))
 
 // Object.values()
-console.log("Object.values:", Object.values(student))
+const values = Object.values(student)
+console.log("Object.values:", values)
 
 // Object.entries()
-console.log("Object.entries:", Object.entries(student))
+const entries = Object.entries(student)
+console.log("Object.entries:", entries)
 for (const entry of Object.entries(student)) {
     console.log(entry)  // gibt is Form von Array aus
     console.log(entry[0] + ": " + entry[1]) // gibt jede value mit seine key

@@ -56,16 +56,14 @@ const LANGUAGE_EN = ["hello", "today", "language course", "welcome", "microphone
  * @returns {string} Das übersetzte Wort
  */
 function translateWord(word) {
-    // let firstWord = LANGUAGE_DE[0]
-    // let lastWord = LANGUAGE_DE[LANGUAGE_DE.length - 1]
     word = word.toLowerCase()
     for (let i = 0; i < LANGUAGE_DE.length; i++) {
-        let currentWord = LANGUAGE_EN[i]
+        let currentWord = LANGUAGE_DE[i].toLowerCase()
         if (currentWord === word) {
             return LANGUAGE_EN[i]
         }
     }
-    // console.log("Das Wort wurde nicht gefunden")
+    console.log("Das Wort wurde nicht gefunden")
     return word
 }
 
