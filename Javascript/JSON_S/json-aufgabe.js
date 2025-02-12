@@ -6,8 +6,13 @@
 
 const fs = require("fs")
 
-const launches = JSON.parse(
-    fs.readFileSync("launches.json", {encoding: "utf-8"})
-)
-
-console.log("Anzahl launches:", launches.length)
+try {
+    const launches = JSON.parse(
+        fs.readFileSync("launches.json", {encoding: "utf-8"})
+    )
+    
+    console.log("Anzahl launches:", launches.length)
+    console.log("")
+} catch (error) {
+    console.error("Fehler beim Lesen oder Parsen der Datei: ", error.message)
+}

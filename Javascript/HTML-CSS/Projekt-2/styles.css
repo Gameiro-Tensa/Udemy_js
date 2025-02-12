@@ -1,0 +1,8 @@
+.container h1 {
+    font-weight: bold;
+}
+
+.container .card .card-header {
+    font-weight: 900;
+    font-style: italic;
+}
